@@ -4,20 +4,19 @@ import {
 	BrowserRouter,
 	Routes,
 	Route,
-	Navigate,
 } from 'react-router-dom'
 
 import Header from './components/Header';
 import DataSetList from './components/DataSetList';
 import Visualisation from './components/Visualisation';
 import Intersection from './components/Intersection';
+import DataSetEdit from './components/DataSetEdit';
+import DataSetAdd from './components/DataSetAdd';
 
 import routes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-import DataSetEdit from './components/DataSetEdit';
 
 
 const App = () => {
@@ -31,6 +30,7 @@ const App = () => {
 					<Route path={routes.visualisationPath()} element={<Visualisation />} />
 					<Route path={routes.intersectionPath()} element={<Intersection />} />
 					<Route path={routes.entityPath()} element={<DataSetEdit />}/>
+					<Route path={routes.addPath()} element={<DataSetAdd />} />
 				</Routes>
 			</main>
 		</BrowserRouter>
