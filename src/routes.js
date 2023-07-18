@@ -4,4 +4,5 @@ export default {
 	entityPath: () => '/dataset/:id',
 	intersectionPath: () => '/intersection',
 	visualisationPath: () => '/visualisation',
+	addPath: () => '/addDataset',
 }
