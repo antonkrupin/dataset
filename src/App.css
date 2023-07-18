@@ -41,7 +41,7 @@
 	width: 60vw;
 }
 
-.updateForm {
+.updateForm, .addForm {
 	width: 20vw;
 	margin-left: auto;
 	margin-right: auto;
