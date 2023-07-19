@@ -1,16 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { fetchRectangleCoords } from '../slices/selectors';
+import { fetchCheckedPoints } from '../slices/selectors';
 
 const MatchedCoordinatesList = () => {
-	const coords = useSelector(fetchRectangleCoords);
-	console.log('coords', coords);
+	const checkedPoints = useSelector(fetchCheckedPoints);
 	return (
 		<div>
 			<ul>
-				<li>first</li>
-				<li>third</li>
-				<li>fourth</li>
+				{checkedPoints.map((point, index) => 
+					<li key={index}>{`${point[0]/10}, ${point[1]/10}`}</li>
+				)}
 			</ul>
 		</div>
 	)
