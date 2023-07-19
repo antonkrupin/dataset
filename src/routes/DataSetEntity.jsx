@@ -7,6 +7,7 @@ const dataset = [
 	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
 	{name: 'Entity2', coordinates: [3, 6], labels: ['labelA', 'labelC']},
 	{name: 'Entity3', coordinates: [4, -1], labels: ['labelD', 'labelC']},
+	{name: 'Entity4', coordinates: [4, -1], labels: ['labelD', 'labelC']},
 ]
 
 const DataSetEntity = (props) => {
@@ -21,7 +22,6 @@ const DataSetEntity = (props) => {
 				<Button className='m-1' variant="primary">Edit</Button>
 				<Link to={`/dataset/${id}`}>Edit</Link>
 				<Button className='m-1' variant="danger">Remove</Button>
-				
 			</td>
 		</tr>
 	)

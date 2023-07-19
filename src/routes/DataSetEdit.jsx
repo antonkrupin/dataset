@@ -7,6 +7,7 @@ const dataset = [
 	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
 	{name: 'Entity2', coordinates: [3, 6], labels: ['labelA', 'labelC']},
 	{name: 'Entity3', coordinates: [4, -1], labels: ['labelD', 'labelC']},
+	{name: 'Entity4', coordinates: [4, -1], labels: ['labelD', 'labelC']},
 ]
 
 

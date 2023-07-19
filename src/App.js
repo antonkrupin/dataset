@@ -6,14 +6,15 @@ import {
 	Route,
 } from 'react-router-dom'
 
+
 import Header from './components/Header';
-import DataSetList from './components/DataSetList';
+import DataSetList from './routes/DataSetList';
 import Visualisation from './components/Visualisation';
 import Intersection from './components/Intersection';
-import DataSetEdit from './components/DataSetEdit';
-import DataSetAdd from './components/DataSetAdd';
+import DataSetEdit from './routes/DataSetEdit';
+import DataSetAdd from './routes/DataSetAdd';
 
-import routes from './routes';
+import routes from './routes/routes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';

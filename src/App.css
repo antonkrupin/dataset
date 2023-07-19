@@ -50,3 +50,12 @@
 .updateForm input, .updateForm .label {
 	margin: 10px 0 10px 0;
 }
+
+.rectangleForm {
+	width: 20%;
+	margin: 20px 0;
+}
+
+.rectangleForm input{
+	width: 10%;
+}
