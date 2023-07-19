@@ -7,26 +7,29 @@ import {
 	setRectangleCoords
 } from '../slices/mainReducer';
 
-const RectangleCoordsForm = () => {
+const RectangleCoordsForm = (props) => {
 	const dispatch = useDispatch();
 	const formRef = useRef();
 	const rectangleCoords = useSelector(fetchRectangleCoords);
-	const points = useSelector(fetchPoints);
+	//const points = useSelector(fetchPoints);
+	const { points } = props;
 
 	const checkPoints = (e) => {
 		e.preventDefault();
 		const formData = new FormData(formRef.current);
-		const coordinates = [formData.get('x1'),formData.get('y1'),formData.get('x2'),formData.get('y2')].map((elem) => parseInt(elem));
+		const rectCoord = [formData.get('x1'),formData.get('y1'),formData.get('x2'),formData.get('y2')].map((elem) => parseInt(elem));
 		/*if (coordinates[0] === coordinates[2] || coordinates[1] === coordinates[3]) {
 			console.log('нельзя построить')
 		}
 		console.log('test')*/
 		const test = points.filter((point) => {
-			if ((point[0] >= coordinates[0]*10 && point[0] <= coordinates[2]*10) && (point[1] >= coordinates[1]*10 && point[1] <= coordinates[3]*10)) {
+			const { coordinates } = point;
+			if ((coordinates[0]*10 >= rectCoord[0]*10 && coordinates[0]*10 <= rectCoord[2]*10) && (coordinates[1]*10 >= rectCoord[1]*10 && coordinates[1]*10 <= rectCoord[3]*10)) {
 				return point;
 			}
 		});
-		dispatch(setRectangleCoords(coordinates));
+		console.log(test);
+		dispatch(setRectangleCoords(rectCoord));
 		dispatch(setIsRectangleCoordsLoaded());
 		dispatch(setCheckedPoints(test));
 	}

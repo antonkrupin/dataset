@@ -8,7 +8,7 @@ const MatchedCoordinatesList = () => {
 		<div>
 			<ul>
 				{checkedPoints.map((point, index) => 
-					<li key={index}>{`${point[0]/10}, ${point[1]/10}`}</li>
+					<li key={index}>{`${point.name}, ${point.labels}`}</li>
 				)}
 			</ul>
 		</div>
