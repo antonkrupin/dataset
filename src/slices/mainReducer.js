@@ -4,7 +4,11 @@ const initialState = {
 	rectangleCoords: null,
 	isRectangleCoordsLoaded: false,
 	error: null,
-	points: [],
+	points: [[22*10, 25*10],
+	[30*10, 50*10],
+	[4*10, 6*10],
+	[2*10, 3*10]],
+	checkedPoints: [],
 }
 
 const slice = createSlice({
@@ -16,13 +20,17 @@ const slice = createSlice({
 		},
 		setIsRectangleCoordsLoaded: (state, action) => {
 			state.isRectangleCoordsLoaded = !state.isRectangleCoordsLoaded;
-		}
+		},
+		setCheckedPoints: (state, action) => {
+			state.checkedPoints = [...action.payload];
+		},
 	}
 });
 
 export const {
 	setRectangleCoords,
 	setIsRectangleCoordsLoaded,
+	setCheckedPoints,
 } = slice.actions;
 
 export default slice.reducer;
