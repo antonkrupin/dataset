@@ -4,6 +4,8 @@ const coordinates = [
 	[-5, 10],
 	[3, 6],
 	[4, -1],
+	[-20, -30],
+	[-70, 80],
 ]
 
 const drawingCoordLines = (ctx, canvas) => {
@@ -60,11 +62,11 @@ const drawingBoundingArea = (ctx, canvas, coords) => {
 const Canvas = () => {
 
 	//заданный квардат 8 на 16 увеличим область в 10 раз
-	const basicW = 100;
-	const basicH = 100;
+	const basicW = 90;
+	const basicH = 90;
 
-	const startWidth = basicW * 5;
-	const startHeight = basicH * 5;
+	const startWidth = basicW*2;
+	const startHeight = basicH*2;
 
 	const startX = 5;
 	const startY = -10;
@@ -74,7 +76,7 @@ const Canvas = () => {
 		[-10, 20, 10, 40],
 		[20, 20, 40, 40],
 		[-20, 10, -40, -10],*/
-		[-50, 40, 30, -80],
+		[-50, -40, -40, -50],
 		/*[20, 10, 40, -10],
 		[-20, -20, -40, -40],
 		[-10, -20, 10, -40],
@@ -99,7 +101,7 @@ const Canvas = () => {
 
 	return (
 		<div>
-			<canvas height='300' width='1000' id='example'>Обновите браузер</canvas>
+			<canvas height='300' width='300' id='example'>Обновите браузер</canvas>
 		</div>
 	)
 };
