@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPoints, fetchRectangleCoords } from '../slices/selectors';
-import { setCheckedPoints, setIsRectangleCoordsLoaded, setRectangleCoords } from '../slices/mainReducer';
+import {
+	setCheckedPoints,
+	setIsRectangleCoordsLoaded,
+	setRectangleCoords
+} from '../slices/mainReducer';
 
 const RectangleCoordsForm = () => {
 	const dispatch = useDispatch();

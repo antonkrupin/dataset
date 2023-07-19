@@ -7,7 +7,7 @@ import DataSetEntity from './DataSetEntity';
 import RectangleCoordsForm from '../components/RectangleCoordsForm';
 import MatchedCoordinatesList from '../components/MatchedCoordinatesList';
 import Canvas from '../components/Canvas';
-import { fetchRectangleCoords, fetchIsRectangleCoordsLoaded } from '../slices/selectors';
+import { fetchIsRectangleCoordsLoaded } from '../slices/selectors';
 
 const dataset = [
 	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
