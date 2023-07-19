@@ -9,6 +9,7 @@ const initialState = {
 	[4*10, 6*10],
 	[2*10, 3*10]],
 	checkedPoints: [],
+	points1: [],
 }
 
 const slice = createSlice({
@@ -24,6 +25,9 @@ const slice = createSlice({
 		setCheckedPoints: (state, action) => {
 			state.checkedPoints = [...action.payload];
 		},
+		setPoints: (state, action) => {
+			state.points1 = [...action.payload];
+		},
 	}
 });
 
@@ -31,6 +35,7 @@ export const {
 	setRectangleCoords,
 	setIsRectangleCoordsLoaded,
 	setCheckedPoints,
+	setPoints,
 } = slice.actions;
 
 export default slice.reducer;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Table from 'react-bootstrap/Table';
 
@@ -7,7 +7,8 @@ import DataSetEntity from './DataSetEntity';
 import RectangleCoordsForm from '../components/RectangleCoordsForm';
 import MatchedCoordinatesList from '../components/MatchedCoordinatesList';
 import Canvas from '../components/Canvas';
-import { fetchIsRectangleCoordsLoaded } from '../slices/selectors';
+import { fetchIsRectangleCoordsLoaded, fetchPoints1 } from '../slices/selectors';
+import { setPoints } from '../slices/mainReducer';
 
 /* const dataset = [
 	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
@@ -23,6 +24,8 @@ const DataSetList = () => {
 	const [dataSet, setDataSet] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	let test;
+	const dispatch = useDispatch();
+	const points = useSelector(fetchPoints1);
 	useEffect(() => {
 		const sendRequest = async () => {
 			
@@ -34,6 +37,7 @@ const DataSetList = () => {
 				//console.log(responseData.dataSets)
 				// setDataSet(responseData.dataSets);
 				setDataSet(responseData.dataSets);
+				dispatch(setPoints(responseData.dataSets));
 				//console.log(dataSet)
 				setIsLoading(false);
 			} catch (err) {
@@ -55,6 +59,11 @@ const DataSetList = () => {
 					</tr>
 				</thead>
 				{!isLoading && (
+					<div>
+						<h1>loading</h1>
+					</div>
+				)}
+				{points.length !== 0 && (
 					<tbody>
 					{
 						dataSet.map((elem, index) =>
@@ -62,11 +71,6 @@ const DataSetList = () => {
 						)
 					}
 					</tbody>
-				)}
-				{!isLoading && (
-					<div>
-						<h1>loading</h1>
-					</div>
 				)}
 				{isLoading && (
 					<h1>loading</h1>
