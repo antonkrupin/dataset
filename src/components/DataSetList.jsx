@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import DataSetEntity from './DataSetEntity';
+import Canvas from './Canvas';
 
 const dataset = [
 	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
@@ -14,7 +15,7 @@ const dataset = [
 const DataSetList = () => {
 	// const { dataset } = props;
 	return (
-		<div className="d-flex justify-content-center">
+		<div className="d-flex justify-content-center align-items-center flex-column">
 			<Table striped bordered hover>
 				<thead>
 					<tr>
@@ -32,6 +33,7 @@ const DataSetList = () => {
 					}
 				</tbody>
 			</Table>
+			<Canvas />
 		</div>
 	)
 }
