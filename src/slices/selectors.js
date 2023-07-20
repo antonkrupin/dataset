@@ -1,5 +1,7 @@
 export const fetchRectangleCoords = (state) => state.main.rectangleCoords;
 export const fetchIsRectangleCoordsLoaded = (state) => state.main.isRectangleCoordsLoaded;
-export const fetchPoints = (state) => state.main.points;
-export const fetchCheckedPoints = (state) => state.main.checkedPoints;
-export const fetchPoints1 = (state) => state.main.points1;
+export const fetchMatchedDatasets = (state) => state.main.matchedDatasets;
+export const fetchDataSet = (state) => state.main.dataSet;
+export const fetchEditableDataset = (state) => state.main.editableDataset;
+export const fetchIsLoading = (state) => state.main.isLoading;
+export const fetchError = (state) => state.main.error;
