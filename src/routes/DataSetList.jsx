@@ -7,16 +7,21 @@ import { Spinner } from 'react-bootstrap';
 import DataSetEntity from './DataSetEntity';
 import RectangleCoordsForm from '../components/RectangleCoordsForm';
 import MatchedCoordinatesList from '../components/MatchedCoordinatesList';
+import VisualisedDataSet from '../components/VisualisedDataSet';
 import Canvas from '../components/Canvas';
-import { fetchIsRectangleCoordsLoaded, fetchDataSet, fetchIsLoading } from '../slices/selectors';
+import {
+	fetchIsRectangleCoordsLoaded,
+	fetchDataSet,
+	fetchIsLoading
+} from '../slices/selectors';
 import { loadDataSet, setIsLoading } from '../slices/mainReducer';
 
 const DataSetList = () => {
+	const dispatch = useDispatch();
+
 	const isRectangleCoords = useSelector(fetchIsRectangleCoordsLoaded);
 	const rectangleCoords = useSelector(fetchIsRectangleCoordsLoaded);
 	const isLoading = useSelector(fetchIsLoading);
-	
-	const dispatch = useDispatch();
 	const points = useSelector(fetchDataSet);
 
 	useEffect(() => {
@@ -34,7 +39,7 @@ const DataSetList = () => {
 			}
 		}
 		sendRequest();
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div className="d-flex justify-content-center align-items-center flex-column">
@@ -58,12 +63,13 @@ const DataSetList = () => {
 					</thead>
 					<tbody>
 						{
-							points.map((elem, index) =>
+							points.map((elem) =>
 								<DataSetEntity key={elem._id} dataSet={elem}/>
 							)
 						}
 						</tbody>
 				</Table>
+				<VisualisedDataSet />
 				<RectangleCoordsForm />
 			{isRectangleCoords && (
 				<div className="d-flex">
