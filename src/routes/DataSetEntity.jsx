@@ -3,16 +3,17 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-import { loadDataSet } from '../slices/mainReducer';
+import { loadDataSet, setIsLoading} from '../slices/mainReducer';
 
 
 const DataSetEntity = (props) => {
-	const { dataSet } = props;
 	const dispatch = useDispatch();
+	const { dataSet } = props;
 
 	const deleteDataset = async () => {
 		const { id } = dataSet;
 		try {
+			dispatch(setIsLoading());
 			await fetch(`http://localhost:5000/api/dataset/${id}`, {
 				method: 'DELETE',
 				header: {'Content-Type': 'application/json'}
@@ -21,6 +22,7 @@ const DataSetEntity = (props) => {
 			const response = await fetch('http://localhost:5000/api');
 			const responseData = await response.json();
 			dispatch(loadDataSet(responseData.dataSets));
+			dispatch(setIsLoading());
 		} catch(err) {
 			console.log(err);
 		}
