@@ -63,7 +63,9 @@ const RectangleCoordsForm = () => {
 				
 				console.log(Math.abs(coordinates[0]) / (x2 - x1));
 				console.log(Math.abs(coordinates[1]) / (y2 - y1));
-				
+				//d = (x3 − x2) ∙ (y1 − y2) − (x1 − x2) ∙ (y3 − y2)
+				//0 ≤ (y1 − y2) ∙ (x − x2) − (x1 − x2) ∙ (y − y2) ≤ d
+				//0 ≤ (x3 − x2) ∙ (y − y2) − (y3 − y2) ∙ (x − x2) ≤ d
 				if ((coordinates[0]*10 >= rectCoord[0]*10 && coordinates[0]*10 <= rectCoord[2]*10) && (coordinates[1]*10 >= rectCoord[1]*10 && coordinates[1]*10 <= rectCoord[3]*10)) {
 					return point;
 				}
