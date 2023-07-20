@@ -19,7 +19,7 @@ const drawingCoordLines = (ctx, canvas) => {
 	ctx.stroke();
 }
 
-const drawingPoints = (ctx, canvas, points) => {
+const drawingMatchedPoints = (ctx, canvas, points) => {
 	points.forEach((point) => {
 		ctx.strokeRect(canvas.width / 2 + point.coordinates[0] * 10, canvas.height / 2 - point.coordinates[1] * 10, 1, 1);
 	})
@@ -54,9 +54,9 @@ const Canvas = () => {
 			ctx.strokeStyle = '#00a884';
 			ctx.lineWidth = 2;
 			if (checkedPoints) {
-				drawingPoints(ctx, canvas, checkedPoints);
+				drawingMatchedPoints(ctx, canvas, checkedPoints);
 			}
-	}, [checkedPoints]);
+	}, [checkedPoints, rectangleCoords]);
 
 	return (
 		<div>
