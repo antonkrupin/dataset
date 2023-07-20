@@ -9,8 +9,6 @@ import {
 
 import Header from './components/Header';
 import DataSetList from './routes/DataSetList';
-import Visualisation from './components/Visualisation';
-import Intersection from './components/Intersection';
 import DataSetEdit from './routes/DataSetEdit';
 import DataSetAdd from './routes/DataSetAdd';
 
@@ -28,8 +26,6 @@ const App = () => {
 			<main>
 				<Routes>
 					<Route path={routes.mainPath()} element={<DataSetList />}/>
-					<Route path={routes.visualisationPath()} element={<Visualisation />} />
-					<Route path={routes.intersectionPath()} element={<Intersection />} />
 					<Route path={routes.entityPath()} element={<DataSetEdit />}/>
 					<Route path={routes.addPath()} element={<DataSetAdd />} />
 				</Routes>
