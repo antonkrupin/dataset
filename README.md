@@ -8,4 +8,4 @@ install project on local machine
 
 ### `npm start`
 
-start application on http://localhost:5000
+start application on http://localhost:3000
