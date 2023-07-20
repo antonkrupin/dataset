@@ -11,6 +11,34 @@ import {
 	setError,
 } from '../slices/mainReducer';
 
+/*const test = (point, coordinates) => {
+	if ((coordinates[0]*10 >= rectCoord[0]*10 && coordinates[0]*10 <= rectCoord[2]*10) && (coordinates[1]*10 >= rectCoord[1]*10 && coordinates[1]*10 <= rectCoord[3]*10)) {
+		return point;
+	}
+}*/
+
+/*const checkedPoints = points.filter((point) => {
+	const { coordinates } = point;
+	console.log('coordinates', coordinates);
+	console.log('rectcoord', rectCoord);
+	if ((coordinates[0]*10 >= rectCoord[0]*10 && coordinates[0]*10 <= rectCoord[2]*10) && (coordinates[1]*10 >= rectCoord[1]*10 && coordinates[1]*10 <= rectCoord[3]*10)) {
+		return point;
+	}
+});*/
+
+/*const checkPoints = (points, coordinates, rectCoord) => {
+	const x = coordinates[0];
+	const y = coordinates[1];
+	const x1 = rectCoord[0];
+	const y1 = rectCoord[2];
+	const x2 = rectCoord[1];
+	const y2 = rectCoord[3];
+	// a - x2 - x1
+	//b y2 - y1
+	console.log(Math.abs(x2 - x1));
+	console.log(Math.abs(y2 - y1));
+}*/
+
 const RectangleCoordsForm = () => {
 	const dispatch = useDispatch();
 	const formRef = useRef();
@@ -28,6 +56,14 @@ const RectangleCoordsForm = () => {
 		} else {
 			const checkedPoints = points.filter((point) => {
 				const { coordinates } = point;
+				const x1 = rectCoord[0];
+				const y1 = rectCoord[1];
+				const x2 = rectCoord[2];
+				const y2 = rectCoord[3];
+				
+				console.log(Math.abs(coordinates[0]) / (x2 - x1));
+				console.log(Math.abs(coordinates[1]) / (y2 - y1));
+				
 				if ((coordinates[0]*10 >= rectCoord[0]*10 && coordinates[0]*10 <= rectCoord[2]*10) && (coordinates[1]*10 >= rectCoord[1]*10 && coordinates[1]*10 <= rectCoord[3]*10)) {
 					return point;
 				}
