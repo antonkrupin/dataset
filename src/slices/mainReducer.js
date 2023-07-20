@@ -3,13 +3,11 @@ import { createSlice, } from '@reduxjs/toolkit';
 const initialState = {
 	rectangleCoords: null,
 	isRectangleCoordsLoaded: false,
+	isLoading: false,
 	error: null,
-	points: [[22*10, 25*10],
-	[30*10, 50*10],
-	[4*10, 6*10],
-	[2*10, 3*10]],
-	checkedPoints: [],
-	points1: [],
+	matchedDatasets: null,
+	dataSet: [],
+	editableDataset: [],
 }
 
 const slice = createSlice({
@@ -17,25 +15,45 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		setRectangleCoords: (state, action) => {
-			state.rectangleCoords = [...action.payload];
+			if (action.payload) {
+				state.rectangleCoords = [...action.payload];
+			} else {
+				state.rectangleCoords = null;
+			}
 		},
 		setIsRectangleCoordsLoaded: (state, action) => {
 			state.isRectangleCoordsLoaded = !state.isRectangleCoordsLoaded;
 		},
-		setCheckedPoints: (state, action) => {
-			state.checkedPoints = [...action.payload];
+		setMatchedDatasets: (state, action) => {
+			if (action.payload) {
+				state.matchedDatasets = [...action.payload];
+			} else {
+				state.matchedDatasets = null;
+			}
 		},
-		setPoints: (state, action) => {
-			state.points1 = [...action.payload];
+		loadDataSet: (state, action) => {
+			state.dataSet = [...action.payload];
 		},
+		setEditableDataset: (state, action) => {
+			state.editableDataset = action.payload;
+		},
+		setIsLoading: (state, action) => {
+			state.isLoading = !state.isLoading;
+		},
+		setError: (state, action) => {
+			state.error = action.payload;
+		}
 	}
 });
 
 export const {
 	setRectangleCoords,
 	setIsRectangleCoordsLoaded,
-	setCheckedPoints,
-	setPoints,
+	setMatchedDatasets,
+	loadDataSet,
+	setEditableDataset,
+	setIsLoading,
+	setError,
 } = slice.actions;
 
 export default slice.reducer;
