@@ -1,16 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { fetchCheckedPoints } from '../slices/selectors';
+import { fetchMatchedDatasets } from '../slices/selectors';
 
 const MatchedCoordinatesList = () => {
-	const checkedPoints = useSelector(fetchCheckedPoints);
+	const checkedPoints = useSelector(fetchMatchedDatasets);
 	return (
 		<div>
-			<ul>
+			<h5>Matched points:</h5>
+			{checkedPoints && (
+				<ul>
 				{checkedPoints.map((point, index) => 
-					<li key={index}>{`${point.name}, ${point.labels}`}</li>
+					<li key={index}>{`Name: ${point.name}, Labels: ${point.labels}`}</li>
 				)}
 			</ul>
+			)}
+			{!checkedPoints && (
+				<h5>No matches found.</h5>
+			)}
 		</div>
 	)
 };

@@ -1,45 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Table from 'react-bootstrap/Table';
+import { Spinner } from 'react-bootstrap';
 
 import DataSetEntity from './DataSetEntity';
 import RectangleCoordsForm from '../components/RectangleCoordsForm';
 import MatchedCoordinatesList from '../components/MatchedCoordinatesList';
 import Canvas from '../components/Canvas';
-import { fetchIsRectangleCoordsLoaded, fetchPoints1 } from '../slices/selectors';
-import { setPoints } from '../slices/mainReducer';
-
-/* const dataset = [
-	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
-	{name: 'Entity2', coordinates: [3, 6], labels: ['labelA', 'labelC']},
-	{name: 'Entity3', coordinates: [4, -1], labels: ['labelD', 'labelC']},
-	{name: 'Entity4', coordinates: [4, -1], labels: ['labelD', 'labelC']},
-] */
+import { fetchIsRectangleCoordsLoaded, fetchDataSet, fetchIsLoading } from '../slices/selectors';
+import { loadDataSet, setIsLoading } from '../slices/mainReducer';
 
 const DataSetList = () => {
 	const isRectangleCoords = useSelector(fetchIsRectangleCoordsLoaded);
 	const rectangleCoords = useSelector(fetchIsRectangleCoordsLoaded);
-
-	const [dataSet, setDataSet] = useState();
-	const [isLoading, setIsLoading] = useState(false);
-	let test;
+	const isLoading = useSelector(fetchIsLoading);
+	
 	const dispatch = useDispatch();
-	const points = useSelector(fetchPoints1);
+	const points = useSelector(fetchDataSet);
+
 	useEffect(() => {
 		const sendRequest = async () => {
 			
 			try {
-				setIsLoading(true);
+				dispatch(setIsLoading());
 				const response = await fetch('http://localhost:5000/api/');
 
 				const responseData = await response.json();
-				//console.log(responseData.dataSets)
-				// setDataSet(responseData.dataSets);
-				setDataSet(responseData.dataSets);
-				dispatch(setPoints(responseData.dataSets));
-				//console.log(dataSet)
-				setIsLoading(false);
+				dispatch(loadDataSet(responseData.dataSets));
+				dispatch(setIsLoading());
 			} catch (err) {
 				console.log(err);
 			}
@@ -49,63 +38,43 @@ const DataSetList = () => {
 
 	return (
 		<div className="d-flex justify-content-center align-items-center flex-column">
-			<Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Coordinates</th>
-						<th>Labels</th>
-						<th>Interact buttons</th>
-					</tr>
-				</thead>
-				{!isLoading && (
-					<div>
-						<h1>loading</h1>
-					</div>
-				)}
-				{points.length !== 0 && (
-					<tbody>
-					{
-						dataSet.map((elem, index) =>
-							<DataSetEntity key={elem._id} dataSet={elem}/>
-						)
-					}
-					</tbody>
-				)}
-				{isLoading && (
-					<h1>loading</h1>
-				)}
-			</Table>
-			{!isLoading && (
-				<h1>not loading</h1>
+			{isLoading && (
+				<>
+					<Spinner animation="border" role="status">
+					</Spinner>
+					<span >Loading dataset</span>
+				</>
 			)}
+			{!isLoading && (
+				<>
+				<Table striped bordered hover>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Coordinates</th>
+							<th>Labels</th>
+							<th>Interact buttons</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							points.map((elem, index) =>
+								<DataSetEntity key={elem._id} dataSet={elem}/>
+							)
+						}
+						</tbody>
+				</Table>
+				<RectangleCoordsForm />
 			{isRectangleCoords && (
 				<div className="d-flex">
 					<Canvas coords={rectangleCoords}/>
 					<MatchedCoordinatesList />
 				</div>
 			)}
+				</>
+			)}
 		</div>
 	)
 }
 
 export default DataSetList;
-
-/*
-{isLoading && (<RectangleCoordsForm points={dataSet}/>)}
-
-{isLoading && (
-					<tbody>
-					{
-						dataSet.map((elem, index) =>
-							<DataSetEntity key={elem._id} dataSet={elem}/>
-						)
-					}
-					</tbody>
-				)}
-				{!isLoading && (
-					<div>
-						<h1>loading</h1>
-					</div>
-				)}
-*/

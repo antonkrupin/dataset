@@ -1,29 +1,41 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-const dataset = [
-	{name: 'Entity1', coordinates: [-5, 10], labels: ['labelF', 'labelB', 'labelC']},
-	{name: 'Entity2', coordinates: [3, 6], labels: ['labelA', 'labelC']},
-	{name: 'Entity3', coordinates: [4, -1], labels: ['labelD', 'labelC']},
-	{name: 'Entity4', coordinates: [4, -1], labels: ['labelD', 'labelC']},
-]
+import { loadDataSet } from '../slices/mainReducer';
+
 
 const DataSetEntity = (props) => {
-	const { elem } = props;
-		
+	const { dataSet } = props;
+	const dispatch = useDispatch();
+
+	const deleteDataset = async () => {
+		const { id } = dataSet;
+		try {
+			await fetch(`http://localhost:5000/api/dataset/${id}`, {
+				method: 'DELETE',
+				header: {'Content-Type': 'application/json'}
+			});
+
+			const response = await fetch('http://localhost:5000/api');
+			const responseData = await response.json();
+			dispatch(loadDataSet(responseData.dataSets));
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
 	return (
-		/*<tr>
-			<td><h5>{elem.name}</h5></td>
-			<td>{elem.coordinates.map((coord, index) => <span key={index}>{coord} </span>)}</td>
-			<td>{elem.labels.map((label, index) => <span key={index}>{label} </span>)}</td>
+		<tr>
+			<td><h5>{dataSet.name}</h5></td>
+			<td>{dataSet.coordinates.map((coord, index) => <span key={index}>{coord} </span>)}</td>
+			<td>{dataSet.labels.map((label, index) => <span key={index}>{label} </span>)}</td>
 			<td>
-				<Button className='m-1' variant="primary">Edit</Button>
-				<Link to={`/dataset/${elem._id}`}>Edit</Link>
-				<Button className='m-1' variant="danger">Remove</Button>
+				<Link to={`/dataset/${dataSet._id}`}>Edit</Link>
+				<Button onClick={deleteDataset} className='m-1' variant="danger">Remove</Button>
 			</td>
-		</tr>*/
-		<div>test</div>
+		</tr>
 	)
 }
 

@@ -1,45 +1,54 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { Button } from 'react-bootstrap';
 
-const DataSetAdd = () => {
-	const [labelsCounter, setLabelsCounter] = useState(1);
+import { setError } from '../slices/mainReducer';
+import { fetchError } from '../slices/selectors';
 
+const DataSetAdd = () => {
+	const dispatch = useDispatch();
+	const error = useSelector(fetchError);
+	const navigate = useNavigate();
 	const ref = useRef();
 
-	const addLabelInput = (e) => {
+	const addNewDataSet = async (e) => {
 		e.preventDefault();
-	}
-
-	const addNewDataSet = (e) => {
-		e.preventDefault();
+		console.log('test')
 		const formData = new FormData(ref.current);
-		const result = {};
-		result.name = formData.get('inputName');
-		result.coordinates = formData.get('inputCoordinates').split(' ');
-		result.labels = formData.get('inputLabels').split(' ');
-		console.log(result);
-		/* const result = {};
-		const formData = new FormData(e.target);
-		result.name = formData.get('inputName');
-		result.coordinates = formData.get('inputCoordinates');
-		result.labels = formData.get('inputLabels');
-		console.log(result); */
+		const newDataset = {};
+		newDataset.name = formData.get('inputName');
+		newDataset.coordinates = formData.get('inputCoordinates').split(' ');
+		newDataset.labels = formData.get('inputLabels').split(' ');
+		if (newDataset.coordinates.length !== 2) {
+			dispatch(setError('Check coordinates. Two coordinates needed.'));
+		} else {
+			await fetch(
+				'http://localhost:5000/api/addDataset', {
+					method: 'POST',
+					headers: {'Content-Type':'application/json'},
+					body: JSON.stringify(newDataset)
+				});
+				dispatch(setError());
+			navigate('/');
+		}
+		
 	}
 	return (
 		<div className="addForm">
 			<h3>Edit dataset</h3>
-			<form className="d-flex flex-column" ref={ref}>
+			<form onSubmit={addNewDataSet} className="d-flex flex-column" ref={ref}>
 				<label htmlFor="inputName">Name</label>
-				<input id="inputName" type="text" placeholder="Name" name="inputName"/>
+				<input id="inputName" type="text" placeholder="Name" name="inputName" required/>
 				<label htmlFor="inputCoordinates">Coordinates</label>
-				<input id="inputCoordinates" type="text" placeholder="coordinates are separated by spaces" name="inputCoordinates"/>
+				<input id="inputCoordinates" type="text" placeholder="Coordinates are separated by spaces" name="inputCoordinates" required/>
 				<label >Labels</label>
 				<div className="d-flex" id="newLabels" >
-					<input type="text" placeholder="Input labels" name="inputLabels"/>
-					<h4 onClick={addLabelInput}>+</h4>
+					<input type="text" placeholder="Input labels separeted by spaces" name="inputLabels" required/>
 				</div>
+				<div className="text-danger">{error}</div>
+				<Button type="submit" className='m-1' variant="success">Add</Button>
 			</form>
-			<Button onClick={addNewDataSet} className='m-1' variant="success">Add</Button>
 		</div>
 	)
 }
