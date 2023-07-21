@@ -8,7 +8,7 @@ import DataSetEntity from './DataSetEntity';
 import RectangleCoordsForm from '../components/RectangleCoordsForm';
 import MatchedCoordinatesList from '../components/MatchedCoordinatesList';
 import VisualisedDataSet from '../components/VisualisedDataSet';
-import Canvas from '../components/Canvas';
+import VisualisedMatchedPoints from '../components/VisualisedMatchedPoints';
 import {
 	fetchIsRectangleCoordsLoaded,
 	fetchDataSet,
@@ -69,14 +69,16 @@ const DataSetList = () => {
 						}
 						</tbody>
 				</Table>
-				<VisualisedDataSet />
-				<RectangleCoordsForm />
-			{isRectangleCoords && (
 				<div className="d-flex">
-					<Canvas coords={rectangleCoords}/>
-					<MatchedCoordinatesList />
+					<VisualisedDataSet />
+					{isRectangleCoords && (<MatchedCoordinatesList />)}
 				</div>
-			)}
+				<RectangleCoordsForm />
+				{isRectangleCoords && (
+					<div className="d-flex">
+						<VisualisedMatchedPoints coords={rectangleCoords}/>
+					</div>
+				)}
 				</>
 			)}
 		</div>
