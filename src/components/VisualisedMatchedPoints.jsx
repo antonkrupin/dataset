@@ -34,7 +34,7 @@ const drawingBoundingArea = (ctx, canvas, coords) => {
 	ctx.stroke();
 }
 
-const Canvas = () => {
+const VisualisedMatchedPoints = () => {
 	const rectangleCoords = useSelector(fetchRectangleCoords);
 	const checkedPoints = useSelector(fetchMatchedDatasets);
 	
@@ -65,4 +65,4 @@ const Canvas = () => {
 	)
 };
 
-export default Canvas;
+export default VisualisedMatchedPoints;

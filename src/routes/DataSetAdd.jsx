@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Button, Spinner } from 'react-bootstrap';
@@ -9,14 +9,19 @@ import { fetchIsLoading, fetchError } from '../slices/selectors';
 const DataSetAdd = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const ref = useRef();
+	const formRef = useRef();
+	const inputRef = useRef();
 	const isLoading = useSelector(fetchIsLoading);
 	const error = useSelector(fetchError);
 	
+	useEffect(() => {
+		inputRef.current.focus();
+	}, []);
+
 	const addNewDataSet = async (e) => {
 		e.preventDefault();
 
-		const formData = new FormData(ref.current);
+		const formData = new FormData(formRef.current);
 		const newDataset = {};
 
 		newDataset.name = formData.get('inputName');
@@ -53,11 +58,12 @@ const DataSetAdd = () => {
 					<form
 						onSubmit={addNewDataSet}
 						className="d-flex flex-column"
-						ref={ref}
+						ref={formRef}
 					>
 						<label htmlFor="inputName">Name</label>
 						<input
 							id="inputName"
+							ref={inputRef}
 							type="text"
 							placeholder="Name"
 							name="inputName"

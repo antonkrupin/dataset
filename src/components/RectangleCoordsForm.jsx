@@ -28,8 +28,13 @@ const RectangleCoordsForm = () => {
 		const formData = new FormData(formRef.current);
 		const coordX = [parseInt(formData.get('x1')), parseInt(formData.get('x2'))].sort();
 		const coordY = [parseInt(formData.get('y1')), parseInt(formData.get('y2'))].sort();
-		
-		if (coordX[0] === coordX[1] || coordY[0] === coordY[1]) {
+
+		if (Number.isNaN(coordX[0]) ||
+				Number.isNaN(coordX[1]) ||
+				Number.isNaN(coordY[0]) ||
+				Number.isNaN(coordY[1])) {
+			dispatch(setError('Check coordinates. Numbers needed.'));
+		} else if (coordX[0] === coordX[1] || coordY[0] === coordY[1]) {
 			dispatch(setError('Check coordinates. Can`t build rectangle.'));
 		} else {
 			const checkedPoints = points.filter((point) => {
